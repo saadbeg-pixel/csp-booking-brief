@@ -1,0 +1,548 @@
+<title>New Connection Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --ink:#171226; --ink-2:#57506b; --ink-3:#867ea0;
+  --ground:#faf9fc; --panel:#ffffff; --rule:#e5e1ee; --rule-2:#efecf5;
+  --brand:#d9008d; --brand-soft:#fff0f9;
+  --free:#008043; --free-soft:#e6f7ee;
+  --cost:#a8341c; --cost-soft:#fdece7;
+  --wait:#7a5b00; --wait-soft:#fff3cf;
+  --disp:"Bricolage Grotesque","Noto Sans",system-ui,sans-serif;
+  --body:"Noto Sans","Noto Sans Devanagari",system-ui,sans-serif;
+  --hi:"Noto Sans Devanagari","Noto Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#f0ecf7; --ink-2:#b4abc8; --ink-3:#8a81a3;
+  --ground:#141020; --panel:#1d1830; --rule:#332b47; --rule-2:#282139;
+  --brand:#ff5cc0; --brand-soft:#33132a;
+  --free:#4bd08c; --free-soft:#10301f;
+  --cost:#ff8f70; --cost-soft:#361b13;
+  --wait:#e8c766; --wait-soft:#332a10;
+}}
+:root[data-theme="dark"]{
+  --ink:#f0ecf7; --ink-2:#b4abc8; --ink-3:#8a81a3;
+  --ground:#141020; --panel:#1d1830; --rule:#332b47; --rule-2:#282139;
+  --brand:#ff5cc0; --brand-soft:#33132a;
+  --free:#4bd08c; --free-soft:#10301f;
+  --cost:#ff8f70; --cost-soft:#361b13;
+  --wait:#e8c766; --wait-soft:#332a10;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+.wide{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--disp);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,52px);font-weight:700;letter-spacing:-.025em}
+h2{font-size:27px;font-weight:700;letter-spacing:-.015em;margin:0 0 6px}
+h3{font-size:18px;font-weight:700;margin:0 0 4px}
+p{margin:0 0 16px;max-width:68ch}
+.hi{font-family:var(--hi)}
+.lede{font-size:19px;color:var(--ink-2);max-width:62ch}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px}
+header{padding:64px 0 34px;border-bottom:1px solid var(--rule)}
+section{padding:44px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.links a{font-family:var(--mono);font-size:12px;text-decoration:none;color:var(--ink);
+  border:1px solid var(--rule);border-radius:8px;padding:9px 13px;background:var(--panel)}
+.links a:hover{border-color:var(--brand);color:var(--brand)}
+.links a span{color:var(--ink-3)}
+.callout{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--brand);
+  border-radius:0 12px 12px 0;padding:18px 20px;margin:0 0 20px}
+.callout p:last-child{margin:0}
+.callout.gap{border-left-color:var(--wait);background:var(--wait-soft)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:22px 0 4px}
+.stat{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:16px 18px}
+.stat b{display:block;font-family:var(--disp);font-size:34px;font-weight:700;letter-spacing:-.02em;
+  color:var(--brand);line-height:1;margin-bottom:7px;font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:18px 20px}
+.card h3{font-size:15px;margin-bottom:6px}
+.card p{font-size:14.5px;color:var(--ink-2);margin:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;padding:3px 8px;border-radius:5px;vertical-align:2px}
+.tag.free{background:var(--free-soft);color:var(--free)}
+.tag.cost{background:var(--cost-soft);color:var(--cost)}
+.tag.wait{background:var(--wait-soft);color:var(--wait)}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14.5px}
+th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;padding:0 14px 9px 0;border-bottom:1px solid var(--rule)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule-2);vertical-align:top;color:var(--ink-2)}
+td:first-child{color:var(--ink);font-weight:500;width:29%}
+td strong{color:var(--ink);font-weight:600}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 16px 40px;font-size:15px;color:var(--ink-2)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:25px;height:25px;
+  border-radius:50%;background:var(--brand-soft);color:var(--brand);font-family:var(--mono);
+  font-size:11px;display:grid;place-items:center}
+ol.steps li b{color:var(--ink);font-weight:600}
+.flowhead{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;margin:30px 0 4px}
+.flowhead .n{font-family:var(--mono);font-size:12px;color:var(--brand)}
+.open li{margin-bottom:14px;color:var(--ink-2);font-size:15px}
+.open li b{color:var(--ink);display:block;font-family:var(--disp);font-size:16px}
+footer{padding:40px 0 70px;color:var(--ink-3);font-size:13px;font-family:var(--mono)}
+
+/* ── map ── */
+.mapshell{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:16px;
+  overflow:hidden;height:700px;margin:22px 0 10px;touch-action:none;cursor:grab}
+.mapshell:active{cursor:grabbing}
+#world{position:absolute;left:0;top:0;transform-origin:0 0}
+#edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+/* map nodes — deliberately NOT .n, which the flow tags already use */
+.mnode{position:absolute;width:186px;background:var(--panel);border:1.4px solid var(--rule);
+  border-radius:11px;padding:9px 11px;font-size:12px;line-height:1.35;color:var(--ink)}
+.mnode b{display:block;font-family:var(--body);font-size:12.5px;font-weight:600}
+.mnode s{display:block;text-decoration:none;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.06em;color:var(--ink-3);margin-bottom:2px}
+.mnode.free{border-color:var(--free);background:var(--free-soft)}
+.mnode.cost{border-color:var(--cost);background:var(--cost-soft)}
+.mnode.wait{border-color:var(--wait);background:var(--wait-soft)}
+.mnode.end{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.mnode.end s{color:var(--ink-3)}
+.mnode.hub{border-color:var(--brand);background:var(--brand-soft)}
+/* an action is not a screen — it is written on the line, never boxed */
+.elabel{position:absolute;font-family:var(--mono);font-size:9.5px;letter-spacing:.02em;
+  color:var(--ink-3);white-space:nowrap;transform:translate(-50%,-50%);pointer-events:none}
+.ctrls{position:absolute;right:12px;bottom:12px;display:flex;gap:6px;z-index:5}
+.ctrls button{font-family:var(--mono);font-size:12px;width:32px;height:32px;border-radius:8px;
+  border:1px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer}
+.ctrls button:hover{border-color:var(--brand);color:var(--brand)}
+.ctrls button.w{width:auto;padding:0 11px}
+.maphint{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;
+  color:var(--ink-3);margin:10px 0 0}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:0}
+</style>
+
+<header class="wrap">
+  <p class="eyebrow">Wiom Partner App · Product brief</p>
+  <h1>New Connection Journey</h1>
+  <p class="lede">How a partner receives a booking, accepts it, and — when he can't do it — tells us why in a way we can act on.</p>
+  <div class="links">
+    <a href="https://www.figma.com/design/W2Z3B5xfFO3UibJSzkyHn2/PA---Dev--%3E-January-2026-Onwards?node-id=13418-3280">Figma · design <span>final</span></a>
+    <a href="https://www.figma.com/design/W2Z3B5xfFO3UibJSzkyHn2/PA---Dev--%3E-January-2026-Onwards?node-id=13418-3794">Figma · prototype <span>start at Index</span></a>
+    <a href="https://claude.ai/code/artifact/6895a0da-8be7-427c-b3c6-2872878678b8">HTML · low-fi prototype</a>
+  </div>
+</header>
+
+<section class="wrap">
+  <p class="eyebrow">Objective</p>
+  <h2>Tell the partner what to do, before telling him what we know</h2>
+  <p>The partner app is an execution surface. Its job is to produce predictable outcomes for Wiom, and every decision the partner makes should reach us as a signal we can verify or learn from.</p>
+  <p>The goal is more installs completed — and fewer lost to unclear information or missed coordination. Two moments decide that:</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>Before he accepts</h3>
+      <p>He should have everything he needs to decide. A partner who declines because he wasn't told enough is a booking we lost for no reason.</p>
+    </div>
+    <div class="card">
+      <h3>After he accepts</h3>
+      <p>He should finish. When he genuinely can't, we want the reason — not silence, and not a timer running out.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">The problem · 10–25 August</p>
+  <h2>Install tasks fail before commitment, and they fail quietly</h2>
+  <div class="stats">
+    <div class="stat"><b>64%</b><span>of tasks die before a technician is assigned. Only ~36% ever reach assignment.</span></div>
+    <div class="stat"><b>59%</b><span>of all failures are a no-action timeout — the slot lapsed because the CSP never acted. Entirely pre-assignment.</span></div>
+    <div class="stat"><b>~4×</b><span>Pre-assignment, CSPs go silent about four times more often than they decline.</span></div>
+    <div class="stat"><b>47%</b><span>of post-assignment failures are a lapsed grace period, not a decline.</span></div>
+    <div class="stat"><b>51%</b><span>of reported post-assignment failures are customer-related — address, scheduling, cancellation, price. The largest single cause is customer-cancelled, at 38%.</span></div>
+  </div>
+
+  <h3 style="margin:26px 0 10px">What this tells us</h3>
+  <p><b>The leverage is before commitment.</b> Two thirds of tasks never reach a technician. Whatever we fix after assignment is working on the smaller third.</p>
+  <p><b>The failure mode is silence, not refusal.</b> A no-action timeout is the single biggest way an install dies, and pre-assignment a partner is roughly four times likelier to say nothing than to say no. A decline is a usable signal; a timeout tells us nothing about why. So the design's first job is to make an honest no easy to find and free to give.</p>
+  <p><b>After commitment, silence is a strategy.</b> Partners let the grace period lapse rather than decline, because declining is visibly penalised and lapsing feels like it isn't. It is the same outcome for Wiom and — under the rules we have set — the same cost to him. The app has to say that out loud, and offer a cheaper honest route: change the day, or let Wiom take the customer.</p>
+  <p><b>Half of late failures were knowable early.</b> When a partner does report a post-assignment failure, about half are customer problems — the address, the schedule, a cancellation. Those are pre-commitment questions surfacing after commitment, which is exactly what the booking screen and the Wiom outreach path are built to catch.</p>
+  <div class="callout"><p>Customer-cancelled being the single largest reported cause (38%) matters twice: it is the most common failure a partner reports, and under our rules it is <b>not his fault and costs him nothing</b>. If he does not know that, he has every reason to keep hiding it in a timeout.</p></div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">The principle</p>
+  <h2>The ✓ splits the journey in two</h2>
+  <p>Everything rests on one line: <b>before the partner accepts, every exit is free. After he accepts, leaving costs him.</b></p>
+  <p>So the address screen carries everything he needs to decide, including the money — it is the last moment saying no is free. Everything after it is built to help him finish, and every way out offers a way to save the job first.</p>
+  <div class="grid2">
+    <div class="card"><h3><span class="tag free">Free</span> Before acceptance</h3>
+      <p>Declining costs nothing. The reason is collected purely so we learn where he can and can't work.</p></div>
+    <div class="card"><h3><span class="tag cost">Costs</span> After acceptance</h3>
+      <p>Abandoning affects his install SLA — the metric tied to his earnings. So every reason opens a recovery before the decline completes.</p></div>
+  </div>
+  <p>The partner is also protected where the failure isn't his: <b>if the customer cancels, nothing is deducted.</b> Changing the install day is free, up to twice.</p>
+</section>
+
+<section class="wide">
+  <p class="eyebrow">End to end</p>
+  <h2>Every path in one view</h2>
+  <p class="maphint">Drag to pan · scroll to zoom · or use the controls</p>
+  <div class="mapshell" id="mapshell">
+    <div id="world"><svg id="edges"></svg></div>
+    <div class="ctrls">
+      <button onclick="zoomBy(1.25)" aria-label="Zoom in">+</button>
+      <button onclick="zoomBy(0.8)" aria-label="Zoom out">−</button>
+      <button class="w" onclick="fit()">fit</button>
+    </div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--free)"></i>free to leave</span>
+    <span><i style="background:var(--cost)"></i>affects SLA</span>
+    <span><i style="background:var(--wait)"></i>Wiom is working on it</span>
+    <span><i style="background:var(--ink)"></i>end state</span>
+    <span style="color:var(--ink-3)">boxes are screens · text on the line is what he tapped</span>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">The flows</p>
+  <h2>Eight paths, one hub</h2>
+  <p>Every flow starts and ends at the same index screen, so any one of them can be reviewed on its own.</p>
+
+  <div class="flowhead"><span class="n">FLOW 0</span><h3>The ask arrives</h3><span class="tag free">free</span></div>
+  <p>A pink bubble floats over whatever the partner is doing, showing only the distance to his nearest existing connection. Long-pressing offers <span class="hi">हटाएँ</span> or <span class="hi">रिमाइंडर</span>. If he dismisses the booking rather than declining it, it appears in his home feed with a <b>4-hour countdown</b> — and tapping that card reopens the booking screen, not a job detail, because he hasn't accepted anything yet.</p>
+
+  <div class="flowhead"><span class="n">FLOW 1</span><h3>Accept and install</h3></div>
+  <ol class="steps">
+    <li><b>Booking screen</b> — map with straight-line distance, the payout, landmark, address, a voice note of the directions, and his existing connections nearby. Two circular buttons: ✕ and ✓.</li>
+    <li><b>Day</b> — the customer's chosen date, the customer's name and a call button, and the option to change the day.</li>
+    <li><b>Team</b> — himself or an installer.</li>
+    <li><b>Confirmation</b> — <span class="hi">(नाम) को यह कनेक्शन भेज दिया</span>, then the job detail and back to the feed.</li>
+  </ol>
+
+  <div class="flowhead"><span class="n">FLOW 2</span><h3>Declining before acceptance</h3><span class="tag free">free</span></div>
+  <p>The ✕ opens a short reason list — cable can't reach, address unclear, no NetBox, on leave today. Each reason opens its own next step rather than ending the booking immediately, and the sheet says plainly that nothing is deducted.</p>
+
+  <div class="flowhead"><span class="n">FLOW 3</span><h3>Changing the install day</h3><span class="tag free">free ×2</span></div>
+  <p>The partner picks a different day and the job continues on it. This is deliberately the cheapest tool in the journey: we would rather have an honest date early than a missed one later, because that is what lets us set the customer's expectation in time.</p>
+
+  <div class="flowhead"><span class="n">FLOW 4</span><h3>When the customer can't be reached</h3><span class="tag wait">Wiom acts</span></div>
+  <p>The app can only report that he pressed call — the IVR never tells us whether anyone answered — so the screen says how many times he called and nothing more. An escalation is always available: Wiom reaches the customer by SMS, WhatsApp and call, and connects them when they pick up. The booking stays with him while that happens.</p>
+
+  <div class="flowhead"><span class="n">FLOW 5</span><h3>Leaving after acceptance</h3><span class="tag cost">affects SLA</span></div>
+  <p>This is where installs are actually lost, so it carries the journey's only interrupt: before the reason list, he is offered the free day change. Only if he still wants out does he pick a reason — and each reason opens its own recovery first.</p>
+
+  <div class="flowhead"><span class="n">FLOW 6</span><h3>Cancelling once a team is assigned</h3><span class="tag cost">affects SLA</span></div>
+  <p>The exit moves into the overflow menu and names its consequence. It never disappears — a partner who can't find the way out goes silent instead, and silence costs him the same while telling us nothing.</p>
+
+  <div class="flowhead"><span class="n">FLOW 7</span><h3>When the customer declines the day</h3></div>
+  <p>A push tells him the customer didn't accept, and the job detail explains what happened.</p>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Reasons</p>
+  <h2>Every reason opens a door</h2>
+  <p>A reason list is friction on a screen the partner wants to leave, so each option earns its place by triggering something real. Reasons only appear where he could actually know the answer — a partner on the booking screen has no customer contact, so he is never asked about the customer there.</p>
+  <div class="scroller"><table>
+    <tr><th>He says</th><th>What opens</th><th>Why</th></tr>
+    <tr><td class="hi">इस जगह तार नहीं जा पाता</td><td>His existing connections nearby, and what stopping bookings here would mean</td><td>He may not track his own density; and it tells him we'll stop wasting his time here</td></tr>
+    <tr><td class="hi">पता समझ नहीं आया</td><td>Wiom asks the customer to confirm the location; the booking stays with him</td><td>This should almost never end in a decline — it's bad data, not an unwilling partner</td></tr>
+    <tr><td class="hi">नेटबॉक्स अभी उपलब्ध नहीं है</td><td>His stock, and an order with a delivery estimate</td><td>After acceptance it also offers moving the day, so he doesn't do that arithmetic himself</td></tr>
+    <tr><td class="hi">आज मैं और मेरी टीम छुट्टी पर है</td><td>We stop sending new bookings today</td><td>Turns a refusal into a setting, so the next six don't hit the same wall</td></tr>
+    <tr><td class="hi">कस्टमर ने मना कर दिया</td><td>Wiom contacts the customer to understand why</td><td>Only offered after acceptance, where he has actually spoken to them</td></tr>
+    <tr><td class="hi">कस्टमर से बात नहीं हो पाई</td><td>Wiom's outreach</td><td>An action, not a reason — Wiom has the real number where the partner has an IVR</td></tr>
+    <tr><td class="hi">18 जुलाई को नहीं कर पाऊँगा</td><td>The day picker</td><td>A date problem is a reschedule wearing a decline's clothes</td></tr>
+  </table></div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Exits</p>
+  <h2>Harder to reach as commitment deepens — never hidden</h2>
+  <div class="scroller"><table>
+    <tr><th>Where he is</th><th>How he leaves</th><th>What it costs</th></tr>
+    <tr><td>Booking screen, before ✓</td><td>A full-size ✕, equal in weight to the ✓</td><td><span class="tag free">nothing</span></td></tr>
+    <tr><td>Booking screen, not now</td><td>Top-bar ✕ → keep it for 4 hours, or decline</td><td><span class="tag free">nothing</span></td></tr>
+    <tr><td>After accepting</td><td>A quieter link, behind one interrupt offering the free day change</td><td><span class="tag cost">install SLA</span></td></tr>
+    <tr><td>After a team is assigned</td><td>Overflow menu, with a confirmation naming the consequence</td><td><span class="tag cost">install SLA</span></td></tr>
+  </table></div>
+  <div class="callout"><p>A connection is never deleted — it is <b>taken back</b>. The ticket stays in his feed with a new status, and the archived view keeps the landmark and who he had assigned, but drops the address and the ability to call. It is no longer his customer.</p></div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Edge cases</p>
+  <h2>What happens when</h2>
+  <div class="scroller"><table>
+    <tr><th>Situation</th><th>Behaviour</th><th>Reasoning</th></tr>
+    <tr><td>He dismisses the booking instead of declining</td><td>Card sits in the feed with a 4-hour countdown; tapping it reopens the booking screen</td><td>He hasn't accepted, so there is no job to open — and the clock is visible rather than silent</td></tr>
+    <tr><td>The 4 hours run out</td><td><strong>Not designed yet</strong> — see open points</td><td>The sheet promises reassignment, so there must be a state that says so</td></tr>
+    <tr><td>He accepts a recovery (location, NetBox)</td><td>The booking stays his; the feed card shows Wiom is working, with no badge</td><td>The wait is ours, not his — a badge would ask him to act on something he can't</td></tr>
+    <tr><td>He calls and nobody answers</td><td>The app records only that he called, and how many times</td><td>The IVR never reports whether a call connected; claiming otherwise would be false</td></tr>
+    <tr><td>He escalates to Wiom and it still fails</td><td>Leaving should not count against him</td><td>He did what we asked; the blocker was independently confirmed</td></tr>
+    <tr><td>The customer cancels</td><td>No SLA impact</td><td>Not his failure</td></tr>
+    <tr><td>He declines a job he never accepted</td><td>No SLA impact, reason recorded</td><td>An early decline is reassignable; a late abandon isn't</td></tr>
+    <tr><td>He is on leave</td><td>New bookings pause for the day</td><td>Stops the next several arriving into the same wall</td></tr>
+    <tr><td>He picks a reason with no recovery</td><td>The decline completes, with the reason echoed back</td><td>The exit must stay one tap away, or he goes silent instead</td></tr>
+  </table></div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Measurement</p>
+  <h2>How we'll know it worked</h2>
+  <p>The headline is not the decline rate — it should go up. It is what replaces silence.</p>
+  <div class="scroller"><table>
+    <tr><th>Measure</th><th>Baseline · direction</th><th>Why it matters</th></tr>
+    <tr><td>No-action timeouts as a share of failures</td><td><strong>59% → down.</strong> The primary measure</td><td>Silence is the single biggest way an install dies, and the failure this design exists to remove</td></tr>
+    <tr><td>Silence-to-decline ratio, pre-assignment</td><td><strong>~4× → toward 1×</strong></td><td>The clearest read on whether an honest no has become easy enough to give</td></tr>
+    <tr><td>Tasks reaching technician assignment</td><td><strong>~36% → up</strong></td><td>Two thirds die before commitment; this is where the volume is</td></tr>
+    <tr><td>Post-assignment grace-period lapses</td><td><strong>47% of post-assignment failures → down</strong></td><td>Tests whether partners stop using silence as the safe exit</td></tr>
+    <tr><td>Declines carrying a typed reason</td><td>Up, toward near-total coverage</td><td>A decline we can read is worth more than one we can't</td></tr>
+    <tr><td>Declines before acceptance</td><td>Up, and that is fine</td><td>An early no is reassignable; it is the trade we chose</td></tr>
+    <tr><td>Customer-related failures reported before commitment rather than after</td><td><strong>51% of reported post-assignment failures are customer-related → shift earlier</strong></td><td>These were knowable at the booking screen; catching them there is the whole point</td></tr>
+    <tr><td>Bookings saved by a recovery door</td><td>Up</td><td>Direct evidence the doors earn their friction</td></tr>
+    <tr><td>Day changes used, and met</td><td>Used more; missed less</td><td>Tests the phase-one bet: an honest date early beats a missed one later</td></tr>
+    <tr><td>Escalations to Wiom, and their outcome</td><td>Watch</td><td>Tells us whether Wiom can actually reach customers partners can't</td></tr>
+    <tr><td>Repeat declines on the same street</td><td>Down after the first</td><td>Shows the coverage signal is being acted on</td></tr>
+  </table></div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Still open</p>
+  <h2>Decisions this design needs</h2>
+  <ol class="open">
+    <li><b>How long does Wiom try before releasing the job?</b>
+      An open-ended wait relocates the uncertainty instead of removing it. A defined window — 48 hours is the working proposal — after which the booking either revives or becomes free to release without penalty.</li>
+    <li><b>Is a "customer refused" claim verified?</b>
+      Verification protects the signal but tells the partner he isn't trusted. The proposal is to verify quietly and never surface it as suspicion — Wiom simply says it will speak to the customer.</li>
+    <li><b>What happens when the 4-hour hold expires?</b>
+      The dismiss sheet promises the connection goes to another partner. There is no screen for that moment yet. Recommended: the card dims in place with the reason, consistent with never deleting a connection.</li>
+    <li><b>Does a Wiom-verified unreachable customer count as no-fault?</b>
+      Proposed as a third no-fault case alongside "declined before accepting" and "customer cancelled". It cannot be gamed because the partner can never claim it — only Wiom can grant it.</li>
+    <li><b>What happens after the two free day changes?</b>
+      Whether a third change is blocked, or allowed with an SLA consequence.</li>
+    <li><b>Is the day the partner picks final, or does the customer confirm it?</b>
+      The design currently shows a confirmation step and a "customer declined your day" path. Removing that step would simplify the journey considerably, but it changes what we promise the customer. This needs an explicit answer before build.</li>
+  </ol>
+</section>
+
+<footer class="wrap">
+  Wiom Partner App · New Connection Journey · design source: PA — Dev, September, Section 3
+</footer>
+
+<script>
+/* ─────────── flow map ─────────── */
+const C=234;                           // column pitch
+// id, col, y, screen name, screen type, tone   —  boxes are screens only
+const N=[
+ ['idx',   0,   0, 'All flows','index','hub'],
+
+ /* 0 · bubble */
+ ['b2',    1, 120, 'Bubble — long-pressed','remove · reminder',''],
+ ['b3',    2, 120, 'Bubble — drag to dismiss','',''],
+ ['tcard', 3, 120, 'Home feed — dismissed','4-hour countdown','wait'],
+
+ /* 1 · happy path */
+ ['b1',    1, 250, 'Android home — bubble','',''],
+ ['fpn',   2, 250, 'Booking screen','₹450 · 40 m · ✕ ✓','free'],
+ ['near',  3, 370, 'Sheet — connections nearby','map + list',''],
+ ['near2', 4, 370, 'Sheet — connections nearby','scrollable',''],
+ ['date',  3, 250, 'Date screen','customer’s day','cost'],
+ ['team',  4, 250, 'Sheet — who will install','',''],
+ ['ack1',  5, 250, 'Ack — sent to the team','',''],
+ ['drill', 6, 250, 'Job detail','technician assigned',''],
+ ['feed1', 7, 250, 'Home feed','install on 18 July',''],
+
+ /* dismiss */
+ ['dis',   2, 490, 'Sheet — not viewing this now','top-bar ✕','free'],
+
+ /* 2 · free exit */
+ ['fpn2',  1, 610, 'Booking screen — ✕ tapped','','free'],
+ ['rf',    2, 610, 'Sheet — reason','4 + other','free'],
+ ['rf2',   3, 610, 'Sheet — reason selected','',''],
+ ['cov',   4, 610, 'Coverage interrupt','2 connections nearby',''],
+ ['rel',   5, 610, 'Ack — booking released','',''],
+ ['back',  6, 610, 'Home feed — taken back','','end'],
+ ['dloc',  4, 730, 'Door — we’ll fetch the location','',''],
+ ['hloc',  5, 730, 'Home feed — Wiom fetching it','','wait'],
+ ['ddev',  4, 850, 'Door — order a NetBox','',''],
+ ['hdev',  5, 850, 'Home feed — NetBox arriving','2 days','wait'],
+
+ /* 3 · change the day */
+ ['date3', 1, 990, 'Date screen — change day','',''],
+ ['why',   2, 990, 'Sheet — why change the day','',''],
+ ['why2',  3, 990, 'Sheet — reason selected','',''],
+ ['pick',  4, 990, 'Sheet — pick a new day','free ×2','free'],
+ ['pick2', 5, 990, 'Sheet — day selected','',''],
+ ['dpend', 6, 990, 'Date screen — new day','',''],
+ ['ddrill',7, 990, 'Job detail — day set','',''],
+ ['dfeed', 8, 990, 'Home feed','now pick a team',''],
+ ['d12',   8,1110, 'Sheet — back to 18 July','',''],
+ ['d16',   7,1110, 'Job detail — awaiting confirmation','',''],
+
+ /* 4 · calls and Wiom */
+ ['h4',    1,1250, 'Android home — bubble','',''],
+ ['fpn4',  2,1250, 'Booking screen','',''],
+ ['date4', 3,1250, 'Date screen — before calling','',''],
+ ['call',  4,1250, 'Call in progress','',''],
+ ['calls', 5,1250, 'Date screen — called twice','',''],
+ ['wsheet',6,1250, 'Sheet — we’ll connect you','',''],
+ ['wack',  7,1250, 'Ack — Wiom is calling','',''],
+ ['wdrill',8,1250, 'Job detail — Wiom status','','wait'],
+ ['wfeed', 9,1250, 'Home feed — Wiom talking','','wait'],
+
+ /* 5 · SLA exit */
+ ['date5', 1,1400, 'Date screen — ✕','','cost'],
+ ['pe',    2,1400, 'Sheet — leaving this job?','the only interrupt','cost'],
+ ['rp',    3,1400, 'Sheet — reason','date screen','cost'],
+ ['rp2',   4,1400, 'Sheet — reason selected','',''],
+ ['d5a',   5,1400, 'Door — Wiom will ask the customer','',''],
+ ['rel2',  6,1400, 'Ack — taken back','SLA affected','cost'],
+ ['back2', 7,1400, 'Home feed — taken back','dimmed','end'],
+ ['d5b',   5,1520, 'Door — Wiom outreach','',''],
+
+ /* 6 · cancel after team */
+ ['drill6',1,1660, 'Job detail — team assigned','',''],
+ ['menu',  2,1660, 'Job detail — ⋮ open','',''],
+ ['cxl',   3,1660, 'Sheet — confirm cancellation','names the SLA cost','cost'],
+
+ /* 7 · customer declines */
+ ['push',  1,1780, 'Push — customer didn’t accept','',''],
+ ['pdrill',2,1780, 'Job detail — after the response','','end']
+];
+
+const E=[
+ /* index */
+ ['idx','b2','0 · bubble'],['idx','b1','1 · happy path'],['idx','fpn2','2 · free exit'],
+ ['idx','date3','3 · change the day'],['idx','h4','4 · can’t reach them'],
+ ['idx','date5','5 · SLA exit'],['idx','drill6','6 · cancel after team'],
+ ['idx','push','7 · customer declines'],
+
+ /* 0 */
+ ['b2','b3','drag'],['b3','idx','released'],
+ ['dis','tcard','later'],['tcard','fpn','tap the card'],
+
+ /* 1 */
+ ['b1','fpn','tap bubble'],['fpn','near','see connections'],['near','near2','scroll'],
+ ['fpn','date','✓ accept'],['date','team','send to team'],['team','ack1','confirm'],
+ ['ack1','drill',''],['drill','feed1','start install'],['feed1','idx','menu'],
+
+ /* dismiss */
+ ['fpn','dis','top-bar ✕'],['dis','rf','not doing it'],['dis','pe','not doing it · from date'],
+
+ /* 2 · free exit and its closures */
+ ['fpn2','rf','✕ decline'],
+ ['rf','rf2','pick a reason'],
+ ['rf2','cov','submit · cable won’t reach'],
+ ['rf2','dloc','address unclear'],
+ ['rf2','ddev','no NetBox'],
+ ['rf2','rel','submit · on leave / other'],
+ ['cov','rel','can’t do this connection'],
+ ['dloc','hloc','yes, fetch it'],['dloc','rel','still not doing it'],
+ ['ddev','hdev','order it'],['ddev','rel2','still not doing it'],
+ ['rel','back','OK'],['back','idx','menu'],
+ ['hloc','idx','menu'],['hloc','wdrill','tap the card'],['hdev','idx','menu'],
+
+ /* 3 */
+ ['date3','why','change day'],['why','why2','pick a reason'],['why2','pick','change day'],
+ ['pick','pick2','pick 20 July'],['pick2','dpend','change day'],['dpend','ddrill',''],
+ ['ddrill','dfeed',''],['ddrill','d12','change'],['dfeed','idx','tap the card'],['d16','idx',''],
+
+ /* 4 */
+ ['h4','fpn4','tap bubble'],['fpn4','date4','✓ accept'],['date4','call','call'],
+ ['call','calls','end call'],['calls','wsheet','let Wiom connect us'],
+ ['wsheet','wack','OK, I’ll wait'],['wack','wdrill',''],['wdrill','wfeed','back'],
+ ['wfeed','wdrill','tap the card'],['wdrill','idx','send to team'],
+
+ /* 5 · SLA exit and its closures */
+ ['date5','dis','top-bar ✕'],
+ ['pe','rp','still leaving'],['pe','why','change the day instead'],
+ ['rp','rp2','pick a reason'],
+ ['rp2','d5a','submit · customer refused'],
+ ['rp2','d5b','submit · can’t reach them'],
+ ['rp2','ddev','submit · no NetBox'],
+ ['d5a','rel2','cancel'],['d5b','rel2','still not doing it'],
+ ['rel2','back2','OK'],['back2','idx','menu'],
+
+ /* 6 */
+ ['drill6','menu','⋮'],['menu','cxl','cancel booking'],['cxl','idx','cancel booking'],
+
+ /* 7 */
+ ['push','pdrill',''],['pdrill','idx','']
+];
+
+const world=document.getElementById('world'), svg=document.getElementById('edges');
+/* pan/zoom state is declared up here because draw() calls fit() immediately */
+const shell=document.getElementById('mapshell');
+let k=1,tx=0,ty=0;
+const pos={};
+N.forEach(([id,col,y,label,sub,kind])=>{
+  const d=document.createElement('div');
+  d.className='mnode'+(kind?' '+kind:'');
+  d.style.left=(col*C)+'px'; d.style.top=y+'px';
+  d.innerHTML=(sub?'<s>'+sub+'</s>':'')+'<b>'+label+'</b>';
+  world.appendChild(d);
+  pos[id]={x:col*C,y:y,w:186,el:d};
+});
+/* redraw on load and after webfonts settle — node heights change with the font,
+   and a single animation frame is not a reliable moment to measure */
+let drawn=false;
+function draw(){
+  svg.innerHTML='';
+  [...world.querySelectorAll('.elabel')].forEach(e=>e.remove());
+  let maxX=0,maxY=0;
+  for(const k in pos){ const p=pos[k]; p.h=p.el.offsetHeight;
+    maxX=Math.max(maxX,p.x+p.w); maxY=Math.max(maxY,p.y+p.h); }
+  svg.setAttribute('width',maxX+80); svg.setAttribute('height',maxY+80);
+  const ns='http://www.w3.org/2000/svg';
+  const rule=getComputedStyle(document.documentElement).getPropertyValue('--ink-3').trim();
+  E.forEach(([a,b,lab])=>{
+    const s=pos[a],t=pos[b]; if(!s||!t) return;
+    let x1,y1,x2,y2,d;
+    if(t.x>s.x){ x1=s.x+s.w; y1=s.y+s.h/2; x2=t.x; y2=t.y+t.h/2;
+      const dx=Math.max(28,(x2-x1)/2); d=`M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}`; }
+    else if(t.x===s.x){ x1=s.x+s.w/2; y1=s.y+s.h; x2=t.x+t.w/2; y2=t.y;
+      d=`M${x1},${y1} C${x1},${y1+30} ${x2},${y2-30} ${x2},${y2}`; }
+    else { x1=s.x; y1=s.y+s.h/2; x2=t.x+t.w; y2=t.y+t.h/2;
+      const dip=Math.max(40,(s.x-t.x)/3);
+      d=`M${x1},${y1} C${x1-dip},${y1} ${x2+dip},${y2} ${x2},${y2}`; }
+    const p=document.createElementNS(ns,'path');
+    p.setAttribute('d',d); p.setAttribute('fill','none');
+    p.setAttribute('stroke',rule||'#867ea0'); p.setAttribute('stroke-width','1.2');
+    p.setAttribute('opacity','.55');
+    svg.appendChild(p);
+    if(lab){ const L=document.createElement('div'); L.className='elabel'; L.textContent=lab;
+      L.style.left=((x1+x2)/2)+'px'; L.style.top=((y1+y2)/2)+'px'; world.appendChild(L); }
+  });
+  /* open at a readable zoom rather than fitting the whole map, which is unreadably small.
+     "fit" is one tap away for the overview. */
+  if(!drawn){ drawn=true; k=0.72; tx=20; ty=20; apply(); }
+}
+draw();
+requestAnimationFrame(draw);
+addEventListener('load',draw);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw).catch(()=>{});
+
+/* pan + zoom */
+function apply(){ world.style.transform=`translate(${tx}px,${ty}px) scale(${k})` }
+function zoomBy(f,cx,cy){
+  const r=shell.getBoundingClientRect();
+  cx=cx===undefined?r.width/2:cx; cy=cy===undefined?r.height/2:cy;
+  const nk=Math.min(2.2,Math.max(0.18,k*f));
+  tx=cx-(cx-tx)*(nk/k); ty=cy-(cy-ty)*(nk/k); k=nk; apply();
+}
+function fit(){
+  const w=+svg.getAttribute('width'), h=+svg.getAttribute('height');
+  const r=shell.getBoundingClientRect();
+  k=Math.min((r.width-40)/w,(r.height-40)/h);
+  tx=(r.width-w*k)/2; ty=20; apply();
+}
+let drag=false,px=0,py=0;
+shell.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;shell.setPointerCapture(e.pointerId)});
+shell.addEventListener('pointermove',e=>{if(!drag)return;tx+=e.clientX-px;ty+=e.clientY-py;px=e.clientX;py=e.clientY;apply()});
+shell.addEventListener('pointerup',e=>{drag=false});
+shell.addEventListener('wheel',e=>{e.preventDefault();
+  const r=shell.getBoundingClientRect();
+  zoomBy(e.deltaY<0?1.12:0.89,e.clientX-r.left,e.clientY-r.top);},{passive:false});
+addEventListener('resize',()=>{});
+</script>
