@@ -312,6 +312,50 @@ footer{padding:40px 0 70px;color:var(--ink-3);font-size:13px;font-family:var(--m
 </section>
 
 <section class="wrap">
+  <p class="eyebrow">Nudges</p>
+  <h2>Reminders between the screens</h2>
+  <p>Two points in the journey pass without the partner opening the app, and both end in a booking dying quietly. These are the moments we reach out to him over <b>UAF</b> — and they now carry a consequence they did not carry before.</p>
+
+  <div class="rules">
+    <div class="rule">
+      <h3>Accepted, no team yet</h3>
+      <ul>
+        <li>He has taken the booking but has not assigned anyone to it.</li>
+        <li>Two reminders go out — the first at <b>x</b>, the second at <b>x + y</b> after acceptance.</li>
+        <li>Each one names the next step: <b>assign a team</b>.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>Team assigned, slot day breaching</h3>
+      <ul>
+        <li>A team is on it and the slot day is approaching or has passed.</li>
+        <li>Further reminders go out as the day is breached.</li>
+        <li>Each one names the next step: <b>get the install done</b>.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>What these messages say</h3>
+      <ul>
+        <li>Every one of them tells him <b>what to do next</b> — not what has happened, and not that something is merely pending.</li>
+        <li>Each states plainly that not doing it <b>will affect his SLA</b>. <b>This is new.</b> Until now these moments passed silently and he had no way of knowing they cost him anything.</li>
+        <li>Same principle as the rest of the journey: wherever waiting is his instinct, the app has to say what waiting costs. A nudge that only reports status leaves him exactly where he was.</li>
+      </ul>
+    </div>
+
+    <div class="rule">
+      <h3>What this needs from build</h3>
+      <ul>
+        <li>Each trigger point needs its own <b>event</b> for UAF to fire on: accepted-without-team at <b>x</b>, again at <b>x + y</b>, and slot-day breach.</li>
+        <li><b>x and y are not set yet.</b> They decide how often he hears from us, so they need values before this can be built.</li>
+        <li>The copy sits under the same rule as the rest of the affirmation copy — expectation and consequence stated clearly, because the rules have changed and he is working from the old ones.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
   <p class="eyebrow">Customer side</p>
   <h2>What the customer sees when the day moves</h2>
   <p>The partner’s date is final — it is not sent to the customer for approval. That makes these two moments the only place the customer’s expectation gets set, and the only place a booking lost to a moved date can still be saved.</p>
