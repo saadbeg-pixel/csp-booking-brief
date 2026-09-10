@@ -78,6 +78,12 @@ section:last-of-type{border-bottom:0}
 .rule li{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin-bottom:7px}
 .rule li:last-child{margin-bottom:0}
 .rule li b{color:var(--ink);font-weight:600}
+ul.plain{margin:12px 0 20px;padding-left:20px}
+ul.plain li{font-size:15px;line-height:1.6;color:var(--ink-2);margin-bottom:8px;max-width:64ch}
+ul.plain li:last-child{margin-bottom:0}
+ul.plain li b{color:var(--ink);font-weight:600}
+h3.sub{margin:30px 0 2px;font-size:17px}
+h3.sub:first-of-type{margin-top:22px}
 .rule li a{color:var(--brand);text-decoration:none;border-bottom:1px solid var(--brand-soft)}
 .rule li a:hover{border-color:var(--brand)}
 .rule li a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
@@ -291,15 +297,6 @@ footer{padding:40px 0 70px;color:var(--ink-3);font-size:13px;font-family:var(--m
     </div>
 
     <div class="rule">
-      <h3>Rejection reasons — two sets</h3>
-      <ul>
-        <li>There are <b>two groups</b>: one shown <b>before</b> accepting a booking, one <b>after</b>. Both are drawn in Figma.</li>
-        <li><b>Collapsed by default</b> — the sheet shows two reasons plus <span class="hi">और वजहें</span>. Tapping that reveals the rest.</li>
-        <li>After acceptance, <span class="hi">कस्टमर से बात नहीं हो पाई</span> and <span class="hi">कस्टमर ने मना कर दिया</span> appear <b>only once he has tapped the call button at least once</b>. Until then they are not in the list at all — he has no way of knowing either to be true, so offering them would only manufacture a reason.</li>
-      </ul>
-    </div>
-
-    <div class="rule">
       <h3>Day change</h3>
       <ul>
         <li><span class="hi">दिन बदलें</span> is <b>always visible</b> — never hidden, never greyed out.</li>
@@ -309,6 +306,50 @@ footer{padding:40px 0 70px;color:var(--ink-3);font-size:13px;font-family:var(--m
       </ul>
     </div>
   </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Rejection reasons</p>
+  <h2>Two sets, and why each one is short</h2>
+  <p>The reasons a partner can give are split by whether he has already accepted the booking. The two lists differ because what he can <b>truthfully know</b> at each point differs — a reason he cannot answer only manufactures data.</p>
+
+  <h3 class="sub">Before accepting</h3>
+  <ul class="plain">
+    <li><span class="hi">यहाँ तार नहीं जा पाता</span></li>
+    <li><span class="hi">नेटबॉक्स नहीं है</span></li>
+    <li><span class="hi">कोई और वजह</span></li>
+  </ul>
+  <p>The sheet opens <b>collapsed</b>, showing the first two with <span class="hi">और वजहें</span> beneath. Tapping that reveals the rest. Nothing is deducted for declining here, and the sheet says so.</p>
+
+  <p><b><span class="hi">पता समझ नहीं आया</span> is deliberately not on this list.</b> The address screen already carries an option for exactly that — he can connect with the customer and clarify the location. It is an action he can take, not a reason to lose the booking, so it stays where it can be resolved.</p>
+
+  <p><b>There are no date-related reasons here at all</b>, because the installation date is not revealed to him before he accepts. He cannot decline over a day he has not seen.</p>
+
+  <h3 class="sub">After accepting</h3>
+  <ul class="plain">
+    <li><span class="hi">कस्टमर ने मना कर दिया</span></li>
+    <li><span class="hi">कस्टमर से बात नहीं हो पाई</span></li>
+    <li><span class="hi">नेटबॉक्स अभी उपलब्ध नहीं है</span></li>
+    <li><span class="hi">कोई और वजह</span></li>
+  </ul>
+  <p>The <b>first two are conditional</b>. They appear only once he has tapped the <b>Call</b> button at least once — until then they are not in the list at all. Until he has tried to reach the customer he has no way of knowing either to be true, and offering them would only give him a convenient answer to pick.</p>
+
+  <h3 class="sub">Why “team not available” is not a rejection reason</h3>
+  <p>It is left out on purpose. Not having a team on the scheduled day is not a reason the booking cannot happen — it is a reason <b>the day has to move</b>. A partner in that position should change the installation date, not cancel the connection.</p>
+  <p>So it appears instead as a <b>date-change reason</b>, where it leads somewhere the job survives. Rejection is reserved for bookings that genuinely cannot proceed; team availability is a scheduling problem and belongs in the date-change flow.</p>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Date change reasons</p>
+  <h2>Why he is moving the day</h2>
+  <p>Asked once, on the way into the day picker. This is the cheapest path in the journey, so the list exists to tell us why install dates really move — not to talk him out of it.</p>
+  <ul class="plain">
+    <li><span class="hi">18 जुलाई को टीम नहीं भेज पाऊँगा</span> — <b>the date is variable</b>; it always carries the slot day he is moving, so he can see which day he is giving up.</li>
+    <li><span class="hi">नेटबॉक्स नहीं है</span></li>
+    <li><span class="hi">कस्टमर ने दूसरा दिन का बोला है</span></li>
+    <li><span class="hi">कस्टमर से बात नहीं हो पाई</span></li>
+  </ul>
+  <p>This is where <b>team availability</b> lands, and it is the reason that list has no equivalent on the rejection sheets.</p>
 </section>
 
 <section class="wrap">
